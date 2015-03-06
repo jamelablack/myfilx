@@ -3,5 +3,5 @@
     - @videos.each do |video|
       .video.span2
         .video.col-sm-2
-          = link_to video, nil do
+          = link_to video_path(video) do
             %img(src="#{video.small_cover_url}")
