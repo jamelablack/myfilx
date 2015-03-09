@@ -1,6 +1,6 @@
 %section.genre
   %header.clearfix
-    %h1 @category.name
+    %h1 #{@category.name}
     .genre_sorting
       Sort by:
       %select(name="")
@@ -11,4 +11,4 @@
     - @category.videos.each do |video|
       .video.col-md-2
         = link_to video_path(video) do 
-          %img(src="video.small_cover.url")
+          %img(src="#{video.small_cover_url}")

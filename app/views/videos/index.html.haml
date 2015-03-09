@@ -1,11 +1,12 @@
-- @categories.each do |category|
-%article.video_category
-  %header
-    %h3= link_to "#{category.name}", category_path(category)
-  .videos.row
-    - category.videos.each do |video|
-      .video.span2
-        .video.col-sm-2
-          = link_to video_path(video) do
-            %img(src="#{video.small_cover_url}")
+- @categories.each do |cat|
+  %article.video_category
+    %header
+      %h3= link_to cat.name, category_path(cat) 
+    .videos.row
+      - cat.videos.each do |video|
+        .video.span2
+          .video.col-sm-2
+            = link_to video_path(video) do
+              %img(src="#{video.small_cover_url}")
+
 
