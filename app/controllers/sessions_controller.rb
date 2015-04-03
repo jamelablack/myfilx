@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
 		user = User.where(email: params[:email]).first
 		if user && user.authenticate(params[:password])
 			session[:user_id] = user.id
-			redirect_to home_path, notice: "You're are signed in!"
+			redirect_to home_path, notice: "You're signed in!"
 		else
-			flash[:notice] = "There is something wrong with your username or password."
+			flash[:error] = "There is something wrong with your username or password."
 			redirect_to sign_in_path
 		end
 	end
