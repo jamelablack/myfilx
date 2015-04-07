@@ -7,6 +7,7 @@ Myflix::Application.routes.draw do
   	collection do
   	 get :search
   	end
+    resources :reviews, only: [:create]
   end
   resources :categories, only: [:show]
 
