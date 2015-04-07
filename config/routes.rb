@@ -2,6 +2,7 @@ Myflix::Application.routes.draw do
 	root to: 'pages#front'
 	get '/home', to: 'videos#index'
   get 'ui(/:action)', controller: 'ui'
+  get 'my_queue', to: "queue_items#index"
   
   resources :videos, only: [:show, :index] do
   	collection do
