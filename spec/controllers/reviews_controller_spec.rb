@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ReviewsController do 
+describe ReviewsController do
 
 	describe "POST create" do
 		let(:video) { Fabricate(:video) }
@@ -11,9 +11,9 @@ describe ReviewsController do
 
 			context "with valid input" do
 				before { post :create, review: Fabricate.attributes_for(:review), video_id: video.id }
-				
+
 				it "redirects to the video show page" do
-					expect(response).to redirect_to video 
+					expect(response).to redirect_to video
 				end
 
 				it "creates a review" do

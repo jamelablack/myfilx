@@ -76,4 +76,64 @@ describe QueueItemsController do
 			end
 		end
 	end
+
+	describe "DELETE destroy" do
+		it "redirects to the my queue page" do
+			session[:user_id] = Fabricate(:user).id
+			queue_item = Fabricate(:queue_item)
+			delete :destroy, id: queue_item.id
+			expect(response).to redirect_to my_queue_path
+		end
+
+		it "deletes the queue item" do
+			amber = Fabricate(:user)
+			session[:user_id] = amber.id
+			queue_item = Fabricate(:queue_item)
+			delete :destroy, id: queue_item.id
+			expect(QueueItem.count).to eq(1)
+		end
+
+
+		it "does not delete the queue item if the queue item is not in the current_user's queue" do
+			amber = Fabricate(:user)
+			bob = Fabricate(:user)
+			session[:user_id] = amber.id
+			queue_item = Fabricate(:queue_item, user: bob)
+			delete :destroy, id: queue_item.id
+			expect(QueueItem.count).to eq(1)
+		end
+		it "it redirects to the sign in page for unauthenticated users" do
+			delete :destroy, id: 3
+			expect(response).to redirect_to sign_in_path
+		end
+	end
+
+
+ describe "POST update_queue" do
+ 	context "with all valid inputs" do
+	 	it "redirects to the my queue page" do
+	 		alice = Fabricate(:user)
+	 		session[:user_id] = alice.id
+	 		queue_item1 = Fabricate(:queue_item, user: alice, position: 1)
+	 		queue_item2 = Fabricate(:queue_item, user: alice, position: 2)
+	 		post :update_queue, queue_items:[{id: queue_item1.id, position: 2}, {id: queue_item2.id, position: 1}]
+	 		expect(response).to redirect_to my_queue_path
+	 	end
+
+	 	it "reorders the queue item" do
+	 		alice = Fabricate(:user)
+	 		session[:user_id] = alice.id
+	 		queue_item1 = Fabricate(:queue_item, user: alice, position: 1)
+	 		queue_item2 = Fabricate(:queue_item, user: alice, position: 2)
+	 		post :update_queue, queue_items:[{id: queue_item1.id, position: 2}, {id: queue_item2.id, position: 1}]
+	 		expect(alice.queue_items).to eq([queue_item2, queue_item1])
+	 	end
+
+	 	it "normalizes the position numbers"
+	end
+
+	 context "with invalid inputs"
+	 context "with unauthenticated users"
+	 context "with queue items that do not belong the current user"
+	end
 end
