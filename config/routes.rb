@@ -12,7 +12,7 @@ Myflix::Application.routes.draw do
   resources :categories, only: [:show]
 
   get '/register', to: 'users#new'
-  resources :users, only: [:create]
+  resources :users, only: [:create, :show]
   get '/sign_in', to: 'sessions#new'
   get '/sign_out', to: 'sessions#destroy'
   resources :sessions, only: [:create]
