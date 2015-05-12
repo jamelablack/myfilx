@@ -5,8 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Category.create(name: "Action", created_at: Time.now, updated_at: Time.now)
-Category.create(name: "Comedy", created_at: Time.now, updated_at: Time.now)
-Category.create(name: "Drama", created_at: Time.now, updated_at: Time.now)
-Category.create(name: "ChickFlix", created_at: Time.now, updated_at: Time.now)
-Category.create(name: "Sci-Fi", created_at: Time.now, updated_at: Time.now)
+User.create(full_name: "Jessica Thigpen", email: 'jessica.thigpen@gmail.com', password: "password")
+
