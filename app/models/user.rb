@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
     end
   end
 
-
   def queued_video?(video)
     queue_items.map(&:video).include?(video)
   end
@@ -31,5 +30,9 @@ class User < ActiveRecord::Base
 
   def generate_token
     self.token = SecureRandom.urlsafe_base64
+  end
+
+  def follow(another_user)
+    following_relationships.create(leader: another_user) if can_follow?(another_user)
   end
 end
