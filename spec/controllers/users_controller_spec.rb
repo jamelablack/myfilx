@@ -15,7 +15,7 @@ describe UsersController do
 				expect(User.count).to eq(1)
 			end
 			it "redirects to th sign on page" do
-				expect(response).to redirect_to  sign_in_path
+				expect(response).to redirect_to sign_in_path
 			end
 
 			it "makes the user follow the inviter" do
