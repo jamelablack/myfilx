@@ -17,7 +17,31 @@ describe UsersController do
 			it "redirects to th sign on page" do
 				expect(response).to redirect_to  sign_in_path
 			end
+
+			it "makes the user follow the inviter" do
+				alice = Fabricate(:user)
+				invitation = Fabricate(:invitation, inviter: alice, recipient_email: 'jam@jamblack.com')
+				post :create, user: {email: 'jam@jamblack.com', password: 'password', full_name: 'Jam Black'}, invitation_token: invitation.token
+				jam = User.where(email: 'jam@jamblack.com').first
+				expect(jam.follows?(alice)).to be_true
+			end
+
+			it "makes the inviter follow the user" do
+				alice = Fabricate(:user)
+				invitation = Fabricate(:invitation, inviter: alice, recipient_email: 'jam@jamblack.com')
+				post :create, user: {email: 'jam@jamblack.com', password: 'password', full_name: 'Jam Black'}, invitation_token: invitation.token
+				jam = User.where(email: 'jam@jamblack.com').first
+				expect(alice.follows?(jam)).to be_true
+			end
+			it "expires the invitation upon acceptance" do
+				alice = Fabricate(:user)
+				invitation = Fabricate(:invitation, inviter: alice, recipient_email: 'jam@jamblack.com')
+				post :create, user: {email: 'jam@jamblack.com', password: 'password', full_name: 'Jam Black'}, invitation_token: invitation.token
+				jam = User.where(email: 'jam@jamblack.com').first
+				expect(Invitation.first.token).to be_nil
+			end
 		end
+
 		context "with invalid input" do
 			before { post :create, user: { password: "password", email: "jamela.black@gmail.com" } }
 			it "does not create the user" do
@@ -62,5 +86,31 @@ describe UsersController do
 			get :show, id: alice.id
 			expect(assigns(:user)).to eq(alice)
 		end
+	end
+
+	describe "GET new_with_invitation_token" do
+		it "render the :new view template" do
+			invitation = Fabricate(:invitation)
+			get :new_with_invitation_token, token: invitation.token
+			expect(response).to render_template :new
+		end
+
+		it "sets @user with recipient's email" do
+			invitation = Fabricate(:invitation)
+			get :new_with_invitation_token, token: invitation.token
+			expect(assigns(:user).email).to eq(invitation.recipient_email)
+		end
+
+		it "sets @invitation_token" do
+			invitation = Fabricate(:invitation)
+			get :new_with_invitation_token, token: invitation.token
+			expect(assigns(:invitation_token)).to eq(invitation.token)
+		end
+
+		it "redirects to expired token page for invalid tokens" do
+			get :new_with_invitation_token, token: 'asdffdhh'
+			expect(response).to redirect_to expired_token_path
+		end
+
 	end
 end
