@@ -7,7 +7,7 @@ describe SessionsController do
 			expect(response).to render_template :new
 		end
 		it "redirects to home page for authenticated users"	do
-			session[:user_id] = Fabricate(:user).id
+			set_current_user
 			get :new
 			expect(response).to redirect_to home_path
 		end
@@ -31,7 +31,7 @@ describe SessionsController do
 				expect(flash[:notice]).not_to be_blank
 			end
 		end
-		context "with invalid credentials" do 
+		context "with invalid credentials" do
 			before do
 				alice = Fabricate(:user)
 				post :create, email: alice.email, password: alice.password + "zdfkvvjans"
