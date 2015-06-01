@@ -41,7 +41,7 @@ describe RelationshipsController do
     end
 
 
-    it "does not delete the relationshop if the current user is not the follower" do
+    it "does not delete the relationship if the current user is not the follower" do
       alice = Fabricate(:user)
       set_current_user(alice)
       bob = Fabricate(:user)
