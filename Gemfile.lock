@@ -199,7 +199,7 @@ DEPENDENCIES
   bootstrap_form
   capybara
   capybara-email
-  coffee-rails
+  coffee-rails (= 4.1.0)
   database_cleaner (= 1.2.0)
   fabrication
   faker
