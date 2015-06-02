@@ -44,7 +44,7 @@ GEM
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
-    bootstrap_form (1.0.0)
+    bootstrap_form (2.3.0)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -196,7 +196,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
-  bootstrap_form (= 1.0.0)
+  bootstrap_form (= 2.3.0)
   capybara
   capybara-email
   coffee-rails (= 4.1.0)
