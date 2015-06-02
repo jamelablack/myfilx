@@ -28,4 +28,5 @@ Myflix::Application.configure do
     :domain         => 'aqueous-coast-5067.herokuapp.com',
     :authentication => :plain,
   }
+  config.action_mailer.default_url_options = { :host => 'aqueous-coast-5067.herokuapp.com' }
 end
