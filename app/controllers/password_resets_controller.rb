@@ -11,9 +11,7 @@ class PasswordResetsController < ApplicationController
   def create
     user = User.where(token: params[:token]).first
     if user
-      user.password = params[:password]
-      user.generate_token
-      user.save
+      PasswordReset.new(user, params[:password]).call
       flash[:success] = "Your password has been changed successfully."
       redirect_to sign_in_path
     else
