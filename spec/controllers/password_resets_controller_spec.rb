@@ -24,7 +24,11 @@ describe PasswordResetsController do
       end
     end
   end
+
   describe "POST create" do
+
+    let(:password_reset) { double 'password reset' }
+
     context "with valid token" do
       it "redirects to the sign in page" do
         alice = Fabricate(:user)
@@ -33,11 +37,15 @@ describe PasswordResetsController do
         expect(response).to redirect_to sign_in_path
       end
 
-      it "updates the user's password" do
+      it "invokes a PasswordReset" do
         alice = Fabricate(:user)
         alice.update_column(:token, '12345')
+
+        expect(PasswordReset).to receive(:new)
+          .with(alice, 'new_password') { password_reset }
+        expect(password_reset).to receive(:call)
+
         post :create, token: '12345', password: 'new_password'
-        expect(alice.reload.authenticate('new_password')).to be_true
       end
 
       it "sets the flash success message" do
@@ -47,13 +55,8 @@ describe PasswordResetsController do
         expect(flash[:success]).to be_present
       end
 
-      it "regenerates the user token" do
-        alice = Fabricate(:user)
-        alice.update_column(:token, '12345')
-        post :create, token: '12345', password: 'new_password'
-        expect(alice.reload.token).not_to eq('12345')
-      end
     end
+
     context "with invalid token" do
       it "redirects to the expired token path" do
         post :create, token: '12345', password: 'some_password'
@@ -61,4 +64,5 @@ describe PasswordResetsController do
       end
     end
   end
+
 end
