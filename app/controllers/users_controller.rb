@@ -9,7 +9,7 @@ before_filter :require_user, only: [:show]
 		@user = User.new(user_params)
 		 if @user.save
 		 	handle_invitations
-		 	AppMailer.send_welcome_email(@user).deliver
+      UserWorker.perform_async(@user.id)
 		 	redirect_to sign_in_path, notice: "Congrats, you're now registered! Please sign in."
 		 else
 		 	flash[:notice] = "Something went wrong. Please try again."
