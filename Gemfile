@@ -34,6 +34,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'capybara-email'
+  gem 'rspec-sidekiq'
 end
 
 group :production do
