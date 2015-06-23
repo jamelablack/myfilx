@@ -13,6 +13,10 @@ gem 'bootstrap_form'
 gem 'bcrypt-ruby'
 gem 'fabrication'
 gem 'faker'
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+gem 'unicorn'
 
 group :development do
   gem 'thin'
@@ -33,6 +37,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'capybara-email'
+  gem 'rspec-sidekiq'
 end
 
 group :production do
