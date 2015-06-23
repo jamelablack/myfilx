@@ -1,8 +1,11 @@
 
+require 'sidekiq/web'
+
 Myflix::Application.routes.draw do
 	root to: 'pages#front'
 	get '/home', to: 'videos#index'
   get 'ui(/:action)', controller: 'ui'
+  mount Sidekiq::Web, at: '/sidekiq'
 
   resources :videos, only: [:show, :index] do
   	collection do
