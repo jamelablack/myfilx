@@ -1,0 +1,19 @@
+machine:
+  ruby:
+    version: 2.1.6
+deployment:
+  production:
+    branch: master
+    commands:
+      - heroku maintenance:on --app aqueous-coast-5067
+      - heroku pg:backups capture --app aqueous-coast-5067
+      - git push git@heroku.com:aqueous-coast-5067.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app aqueous-coast-5067
+      - heroku maintenance:off --app aqueous-coast-5067
+  staging:
+    branch: staging
+    commands:
+      - heroku maintenance:on --app aqueous-coast-5067
+      - git push git@heroku.com:aqueous-coast-5067.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app aqueous-coast-5067
+      - heroku maintenance:off --app aqueous-coast-5067

@@ -17,6 +17,7 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'unicorn'
+gem 'sentry-raven'
 
 group :development do
   gem 'thin'
