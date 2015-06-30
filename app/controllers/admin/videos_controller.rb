@@ -7,7 +7,18 @@ class Admin::VideosController < ApplicationController
     @video = Video.new
   end
 
+  def create
+    video = Video.new(params[video_params])
+    flash[:success] = "You have successfully added '#{video.title}'."
+    redirect_to new_admin_video_path
+  end
+
   private
+
+  def video_params
+    params.require(:video).permit!
+  end
+
   def require_admin
     if !current_user.admin?
       flash[:error] = "You're not authorized to do that."
