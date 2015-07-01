@@ -65,9 +65,26 @@ describe Admin::VideosController do
         expect(category.videos.count).to eq(0)
       end
 
-      it "render the :new template"
-      it "sets the @video variable"
-      it "sets the flash error message"
+      it "render the :new template" do
+        set_current_admin
+        category = Fabricate(:category)
+        post :create, video: { category_id: category.id, description: "classic" }
+        expect(response).to render_template :new
+      end
+
+      it "sets the @video variable" do
+        set_current_admin
+        category = Fabricate(:category)
+        post :create, video: { category_id: category.id, description: "classic" }
+        expect(assigns(:video)).to be_present
+      end
+
+      it "sets the flash error message" do
+        set_current_admin
+        category = Fabricate(:category)
+        post :create, video: { category_id: category.id, description: "classic" }
+        expect(flash[:error]).to be_present
+      end
     end
   end
 end

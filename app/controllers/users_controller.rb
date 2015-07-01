@@ -34,7 +34,7 @@ before_filter :require_user, only: [:show]
 
 	private
 	def user_params
-		params.require(:user).permit!
+		params.require(:user).permit(:full_name, :email, :password_digest)
 	end
 
 	def handle_invitations
