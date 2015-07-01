@@ -18,6 +18,8 @@ gem 'sinatra', require: false
 gem 'slim'
 gem 'unicorn'
 gem 'sentry-raven'
+gem 'carrierwave-aws'
+gem 'mini_magick'
 
 group :development do
   gem 'thin'
