@@ -20,6 +20,7 @@ gem 'unicorn'
 gem 'sentry-raven'
 gem 'carrierwave-aws'
 gem 'mini_magick'
+gem 'figaro'
 
 group :development do
   gem 'thin'
