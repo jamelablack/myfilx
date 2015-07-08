@@ -15,6 +15,10 @@ Myflix::Application.routes.draw do
   end
   resources :categories, only: [:show]
 
+  namespace :admin do
+    resources :videos, only: [:new, :create]
+  end
+
   get '/register', to: 'users#new'
   resources :users, only: [:create, :show]
   get 'register/:token', to: "users#new_with_invitation_token", as: 'register_with_token'
