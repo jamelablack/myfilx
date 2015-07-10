@@ -9,6 +9,17 @@ before_filter :require_user, only: [:show]
 		@user = User.new(user_params)
 		 if @user.save
 		 	handle_invitations
+		 	Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+		 	Stripe::Charge.create(
+		    :amount => 999,
+		    :currency => "usd",
+		    :source => token,
+		    :description => "Sign up charge for #{@user.email} "
+  )
+rescue Stripe::CardError => e
+  # The card has been declined
+end
+
       AppMailer.delay.send_welcome_email(@user.id)
 		 	redirect_to sign_in_path, notice: "Congrats, you're now registered! Please sign in."
 		 else

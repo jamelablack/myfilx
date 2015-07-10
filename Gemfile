@@ -21,6 +21,7 @@ gem 'sentry-raven'
 gem 'carrierwave-aws'
 gem 'mini_magick'
 gem 'figaro'
+gem 'stripe'
 
 group :development do
   gem 'thin'
