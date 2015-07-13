@@ -19,13 +19,13 @@
         %fieldset.credit_card
           %span.payment-errors
         .form-group
-          %label.col-sm-10 Credit Card Number
+          %label.col-sm-10(for="credit-card-number")Credit Card Number
           .col-sm-6
-            %input.form-control(type="text" data-stripe="number")
+            %input.form-control.span3#credit-card-number(type="text" data-stripe="number")
         .form-group
-          %label.col-sm-10 Security Code
+          %label.col-sm-10(for="security-code")Security Code
           .col-sm-6
-            %input.form-control(type="text" data-stripe="cvc")
+            %input.form-control.span3#security-code(type="text" data-stripe="cvc")
         .form-group
           %label.col-sm-10 Expiration
           .col-sm-3

@@ -22,6 +22,8 @@ gem 'carrierwave-aws'
 gem 'mini_magick'
 gem 'figaro'
 gem 'stripe'
+gem 'vcr'
+gem 'webmock'
 
 group :development do
   gem 'thin'
@@ -43,6 +45,7 @@ group :test do
   gem 'launchy'
   gem 'capybara-email'
   gem 'rspec-sidekiq'
+  gem 'selenium-webdriver'
 end
 
 group :production do
