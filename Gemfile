@@ -24,6 +24,7 @@ gem 'figaro'
 gem 'stripe'
 gem 'vcr'
 gem 'webmock'
+gem 'draper'
 
 group :development do
   gem 'thin'
