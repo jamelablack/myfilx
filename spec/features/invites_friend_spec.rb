@@ -35,6 +35,7 @@ feature "User invited friend" do
     select "12 - December", from: "date_month"
     select "2017", from: "date_year"
     click_button "Sign Up"
+    expect(page).to have_css('.alert')
   end
 
   def friend_signs_in
