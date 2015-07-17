@@ -9,68 +9,30 @@ describe UsersController do
 			end
 		end
 	describe "POST create" do
-		context "with valid input" do
-			before { post :create, user: Fabricate.attributes_for(:user) }
-			it "creates the user" do
-				expect(User.count).to eq(1)
-			end
+		context "successful user sign up" do
+
 			it "redirects to th sign on page" do
+				result = double(:sign_up_result, successful?: true)
+				UserSignup.any_instance.should_receive(:sign_up).and_return(result)
+
+				post :create, user: Fabricate.attributes_for(:user)
 				expect(response).to redirect_to sign_in_path
 			end
-
-			it "makes the user follow the inviter" do
-				alice = Fabricate(:user)
-				invitation = Fabricate(:invitation, inviter: alice, recipient_email: 'jam@jamblack.com')
-				post :create, user: {email: 'jam@jamblack.com', password: 'password', full_name: 'Jam Black'}, invitation_token: invitation.token
-				jam = User.where(email: 'jam@jamblack.com').first
-				expect(jam.follows?(alice)).to be_true
-			end
-
-			it "makes the inviter follow the user" do
-				alice = Fabricate(:user)
-				invitation = Fabricate(:invitation, inviter: alice, recipient_email: 'jam@jamblack.com')
-				post :create, user: {email: 'jam@jamblack.com', password: 'password', full_name: 'Jam Black'}, invitation_token: invitation.token
-				jam = User.where(email: 'jam@jamblack.com').first
-				expect(alice.follows?(jam)).to be_true
-			end
-			it "expires the invitation upon acceptance" do
-				alice = Fabricate(:user)
-				invitation = Fabricate(:invitation, inviter: alice, recipient_email: 'jam@jamblack.com')
-				post :create, user: {email: 'jam@jamblack.com', password: 'password', full_name: 'Jam Black'}, invitation_token: invitation.token
-				jam = User.where(email: 'jam@jamblack.com').first
-				expect(Invitation.first.token).to be_nil
-			end
 		end
 
-		context "with invalid input" do
-			before { post :create, user: { password: "password", email: "jamela.black@gmail.com" } }
-			it "does not create the user" do
-				expect(User.count).to eq(0)
-			end
-			it "render the :new template" do
-				expect(response).to render_template	 :new
-			end
-
-			it "sets @user" do
-				expect(assigns(:user)).to be_instance_of(User)
-			end
-		end
-		context "sending emails" do
-			after { ActionMailer::Base.deliveries.clear }
-
-			it "sends out email to the user with valid inputs" do
-				post :create, user: { email: "jam@example.com", password: "password", full_name: "Jamela Black"}
-				expect(ActionMailer::Base.deliveries.last.to).to eq(['jam@example.com'])
+		context "failed user sign up" do
+			it "renders the new template" do
+				result = double(:sign_up_result, successful?: false, error_message: "This is the error message")
+				UserSignup.any_instance.should_receive(:sign_up).and_return(result)
+				post :create, user: Fabricate.attributes_for(:user), stripeToken: '1234456'
+				expect(response).to render_template(:new)
 			end
 
-			it "sends out email containing the user's name with valid inputs" do
-				post :create, user: { email: "jam@example.com", password: "password", full_name: "Jamela Black"}
-				expect(ActionMailer::Base.deliveries.last.body).to include("Jamela Black")
-			end
-
-			it "does not send out email with invalid inputs" do
-				post :create, user: { email: "jam@example.com" }
-				expect(ActionMailer::Base.deliveries).to be_empty
+			it "sets the flash error message" do
+				result = double(:sign_up_result, successful?: false, error_message: "This is the error message")
+				UserSignup.any_instance.should_receive(:sign_up).and_return(result)
+				post :create, user: Fabricate.attributes_for(:user), stripeToken: '1234456'
+				expect(flash[:error]).to eq("This is the error message")
 			end
 		end
 	end
@@ -111,6 +73,5 @@ describe UsersController do
 			get :new_with_invitation_token, token: 'asdffdhh'
 			expect(response).to redirect_to expired_token_path
 		end
-
 	end
 end

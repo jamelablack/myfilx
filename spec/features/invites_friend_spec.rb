@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature "User invited friend" do
-  scenario "User succesfully intvites friend and invitation is accepted" do
+  scenario "User succesfully invites friend and invitation is accepted", { js: true, vcr: true }  do
     jam = Fabricate(:user)
     sign_in(jam)
 
@@ -30,7 +30,12 @@ feature "User invited friend" do
 
     fill_in "Password", with: "password"
     fill_in "Full Name", with: "Amber Howard"
+    fill_in "Credit Card Number", with: "4242424242424242"
+    fill_in "Security Code", with: "123"
+    select "12 - December", from: "date_month"
+    select "2017", from: "date_year"
     click_button "Sign Up"
+    expect(page).to have_css('.alert')
   end
 
   def friend_signs_in
