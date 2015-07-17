@@ -22,8 +22,7 @@ gem 'carrierwave-aws'
 gem 'mini_magick'
 gem 'figaro'
 gem 'stripe'
-gem 'vcr'
-gem 'webmock'
+gem 'stripe_event'
 gem 'draper'
 
 group :development do
@@ -37,6 +36,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '2.99'
+
 end
 
 group :test do
@@ -45,8 +45,9 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'capybara-email'
-  gem 'rspec-sidekiq'
   gem 'selenium-webdriver'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :production do

@@ -182,10 +182,6 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rspec (2.99.0)
-      rspec-core (~> 2.99.0)
-      rspec-expectations (~> 2.99.0)
-      rspec-mocks (~> 2.99.0)
     rspec-collection_matchers (1.0.0)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (2.99.0)
@@ -201,9 +197,6 @@ GEM
       rspec-core (~> 2.99.0)
       rspec-expectations (~> 2.99.0)
       rspec-mocks (~> 2.99.0)
-    rspec-sidekiq (1.1.0)
-      rspec (~> 2.0)
-      sidekiq (>= 2.4.0)
     rubyzip (1.1.7)
     safe_yaml (1.0.4)
     sass (3.2.19)
@@ -247,6 +240,9 @@ GEM
     stripe (1.23.0)
       json (~> 1.8.1)
       rest-client (~> 1.4)
+    stripe_event (1.5.0)
+      activesupport (>= 3.1)
+      stripe (~> 1.6)
     temple (0.7.6)
     thin (1.5.0)
       daemons (>= 1.0.9)
@@ -309,7 +305,6 @@ DEPENDENCIES
   rails (= 4.1.1)
   rails_12factor
   rspec-rails (= 2.99)
-  rspec-sidekiq
   sass-rails
   selenium-webdriver
   sentry-raven
@@ -318,6 +313,7 @@ DEPENDENCIES
   sinatra
   slim
   stripe
+  stripe_event
   thin
   uglifier
   unicorn

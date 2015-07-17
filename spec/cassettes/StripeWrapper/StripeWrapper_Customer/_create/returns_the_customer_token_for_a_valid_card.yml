@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/customers
+    uri: https://api.stripe.com/v1/tokens
     body:
       encoding: US-ASCII
-      string: card=tok_16PRJWIVfRceAQlJ1ihDZE2D&email=jam%40jamblack.com&plan=base
+      string: card[number]=4242424242424242&card[exp_month]=6&card[exp_year]=2018&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -22,7 +22,7 @@ http_interactions:
         Jamelas-MacBook-Air.local 14.4.0 Darwin Kernel Version 14.4.0: Thu May 28
         11:35:04 PDT 2015; root:xnu-2782.30.5~1/RELEASE_X86_64 x86_64","hostname":"Jamelas-MacBook-Air.local"}'
       Content-Length:
-      - '68'
+      - '81'
   response:
     status:
       code: 200
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 17 Jul 2015 05:23:15 GMT
+      - Thu, 16 Jul 2015 20:35:43 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2334'
+      - '781'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -49,7 +49,99 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6cgg0Ncgd7ydS4
+      - req_6cYBtE5M4WIXeB
+      Stripe-Version:
+      - '2015-07-07'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "tok_16PJ51IVfRceAQlJ452tRQ57",
+          "livemode": false,
+          "created": 1437078943,
+          "used": false,
+          "object": "token",
+          "type": "card",
+          "card": {
+            "id": "card_16PJ51IVfRceAQlJHDZ2vwrf",
+            "object": "card",
+            "last4": "4242",
+            "brand": "Visa",
+            "funding": "credit",
+            "exp_month": 6,
+            "exp_year": 2018,
+            "fingerprint": "pg1CYhCS9T2GnyZJ",
+            "country": "US",
+            "name": null,
+            "address_line1": null,
+            "address_line2": null,
+            "address_city": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_country": null,
+            "cvc_check": "unchecked",
+            "address_line1_check": null,
+            "address_zip_check": null,
+            "tokenization_method": null,
+            "dynamic_last4": null,
+            "metadata": {}
+          },
+          "client_ip": "73.129.194.161"
+        }
+    http_version: 
+  recorded_at: Thu, 16 Jul 2015 20:35:43 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers
+    body:
+      encoding: US-ASCII
+      string: card=tok_16PJ51IVfRceAQlJ452tRQ57&email=brady.robel%40bartellmaggio.org&plan=base
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.23.0
+      Authorization:
+      - Bearer sk_test_Z9DBgyLvkOKJlgslZ9dpkbgo
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.23.0","lang":"ruby","lang_version":"2.1.6 p336 (2015-04-13)","platform":"x86_64-darwin14.0","engine":"ruby","publisher":"stripe","uname":"Darwin
+        Jamelas-MacBook-Air.local 14.4.0 Darwin Kernel Version 14.4.0: Thu May 28
+        11:35:04 PDT 2015; root:xnu-2782.30.5~1/RELEASE_X86_64 x86_64","hostname":"Jamelas-MacBook-Air.local"}'
+      Content-Length:
+      - '81'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 16 Jul 2015 20:35:44 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2347'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_6cYBof3S3J6Qh1
       Stripe-Version:
       - '2015-07-07'
       Strict-Transport-Security:
@@ -59,21 +151,21 @@ http_interactions:
       string: |
         {
           "object": "customer",
-          "created": 1437110594,
-          "id": "cus_6cgg0dmTXf59H2",
+          "created": 1437078943,
+          "id": "cus_6cYB2AsVFAS1Ux",
           "livemode": false,
           "description": null,
-          "email": "jam@jamblack.com",
+          "email": "brady.robel@bartellmaggio.org",
           "delinquent": false,
           "metadata": {},
           "subscriptions": {
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6cgg0dmTXf59H2/subscriptions",
+            "url": "/v1/customers/cus_6cYB2AsVFAS1Ux/subscriptions",
             "data": [
               {
-                "id": "sub_6cggfAQI2dmfTI",
+                "id": "sub_6cYBKmIRN962sc",
                 "plan": {
                   "interval": "month",
                   "name": "base plan",
@@ -89,12 +181,12 @@ http_interactions:
                   "statement_descriptor": null
                 },
                 "object": "subscription",
-                "start": 1437110594,
+                "start": 1437078943,
                 "status": "active",
-                "customer": "cus_6cgg0dmTXf59H2",
+                "customer": "cus_6cYB2AsVFAS1Ux",
                 "cancel_at_period_end": false,
-                "current_period_start": 1437110594,
-                "current_period_end": 1439788994,
+                "current_period_start": 1437078943,
+                "current_period_end": 1439757343,
                 "ended_at": null,
                 "trial_start": null,
                 "trial_end": null,
@@ -114,16 +206,16 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6cgg0dmTXf59H2/sources",
+            "url": "/v1/customers/cus_6cYB2AsVFAS1Ux/sources",
             "data": [
               {
-                "id": "card_16PRJWIVfRceAQlJ818vAgLX",
+                "id": "card_16PJ51IVfRceAQlJHDZ2vwrf",
                 "object": "card",
                 "last4": "4242",
                 "brand": "Visa",
                 "funding": "credit",
-                "exp_month": 7,
-                "exp_year": 2015,
+                "exp_month": 6,
+                "exp_year": 2018,
                 "fingerprint": "pg1CYhCS9T2GnyZJ",
                 "country": "US",
                 "name": null,
@@ -139,12 +231,12 @@ http_interactions:
                 "tokenization_method": null,
                 "dynamic_last4": null,
                 "metadata": {},
-                "customer": "cus_6cgg0dmTXf59H2"
+                "customer": "cus_6cYB2AsVFAS1Ux"
               }
             ]
           },
-          "default_source": "card_16PRJWIVfRceAQlJ818vAgLX"
+          "default_source": "card_16PJ51IVfRceAQlJHDZ2vwrf"
         }
     http_version: 
-  recorded_at: Fri, 17 Jul 2015 05:23:15 GMT
+  recorded_at: Thu, 16 Jul 2015 20:35:44 GMT
 recorded_with: VCR 2.9.3
