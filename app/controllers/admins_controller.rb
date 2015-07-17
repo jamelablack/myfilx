@@ -1,7 +1,7 @@
 class AdminsController < ApplicationController
   before_filter :require_admin
 
-  Private
+  private
 
   def require_admin
     if !current_user.admin?
