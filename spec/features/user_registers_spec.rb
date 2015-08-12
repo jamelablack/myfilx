@@ -62,7 +62,7 @@ feature "User registers", {js: true, vcr: true} do
     fill_in "Credit Card Number", with: credit_card
     fill_in "Security Code", with: "123"
     select "7 - July", from: "date_month"
-    select "2015", from: "date_year"
+    select "2019", from: "date_year"
   end
 
 end
