@@ -36,6 +36,7 @@ feature "User registers", {js: true, vcr: true} do
     visit register_path
     fill_in_invalid_user_info
     fill_in_credit_card_info('12234')
+    wait_for_ajax
     click_button "Sign Up"
     expect(page).to have_content("This card number looks invalid.")
   end
