@@ -17,7 +17,7 @@ describe Video do
 			futurama = Video.create(title: "Futurama", description: "Space Travel")
 			back_to_future = Video.create(title: "Back to Future", description: "Time Travel")
 			expect(Video.search_by_title("Futurama")).to eq([futurama])
-		end	
+		end
 
 		it "returns an array of one video for a partial match" do
 			futurama = Video.create(title: "Futurama", description: "Space Travel")
