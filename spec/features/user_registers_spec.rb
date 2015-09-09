@@ -36,7 +36,10 @@ feature "User registers", {js: true, vcr: true} do
     visit register_path
     fill_in_invalid_user_info
     fill_in_credit_card_info('12234')
+    wait_for_ajax
     click_button "Sign Up"
+    sleep 5
+    save_and_open_page
     expect(page).to have_content("This card number looks invalid.")
   end
 
@@ -62,7 +65,7 @@ feature "User registers", {js: true, vcr: true} do
     fill_in "Credit Card Number", with: credit_card
     fill_in "Security Code", with: "123"
     select "7 - July", from: "date_month"
-    select "2015", from: "date_year"
+    select "2019", from: "date_year"
   end
 
 end

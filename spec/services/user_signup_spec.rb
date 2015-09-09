@@ -75,5 +75,13 @@ describe UserSignup do
         expect(ActionMailer::Base.deliveries).to be_empty
       end
     end
+    #context "when user save fails" do
+      #let(:user) { Fabricate.build(:user, email: 'lee@outerim.com') }
+      #before { user.should_receive(:save).and_raise_error }
+
+      #it "refunds the card" do
+
+      #end
+    #end
   end
 end

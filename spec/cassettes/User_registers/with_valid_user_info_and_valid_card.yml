@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: card=tok_16PRJWIVfRceAQlJ1ihDZE2D&email=jam%40jamblack.com&plan=base
+      string: card=tok_16Z61sIVfRceAQlJ4v6tot40&email=jam%40jamblack.com&plan=base
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 17 Jul 2015 05:23:15 GMT
+      - Wed, 12 Aug 2015 20:40:57 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6cgg0Ncgd7ydS4
+      - req_6mfMo5dHYZHfG4
       Stripe-Version:
       - '2015-07-07'
       Strict-Transport-Security:
@@ -59,8 +59,8 @@ http_interactions:
       string: |
         {
           "object": "customer",
-          "created": 1437110594,
-          "id": "cus_6cgg0dmTXf59H2",
+          "created": 1439412057,
+          "id": "cus_6mfMNnrzN7rayc",
           "livemode": false,
           "description": null,
           "email": "jam@jamblack.com",
@@ -70,10 +70,10 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6cgg0dmTXf59H2/subscriptions",
+            "url": "/v1/customers/cus_6mfMNnrzN7rayc/subscriptions",
             "data": [
               {
-                "id": "sub_6cggfAQI2dmfTI",
+                "id": "sub_6mfMh71FLvEOUU",
                 "plan": {
                   "interval": "month",
                   "name": "base plan",
@@ -89,12 +89,12 @@ http_interactions:
                   "statement_descriptor": null
                 },
                 "object": "subscription",
-                "start": 1437110594,
+                "start": 1439412057,
                 "status": "active",
-                "customer": "cus_6cgg0dmTXf59H2",
+                "customer": "cus_6mfMNnrzN7rayc",
                 "cancel_at_period_end": false,
-                "current_period_start": 1437110594,
-                "current_period_end": 1439788994,
+                "current_period_start": 1439412057,
+                "current_period_end": 1442090457,
                 "ended_at": null,
                 "trial_start": null,
                 "trial_end": null,
@@ -114,16 +114,16 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6cgg0dmTXf59H2/sources",
+            "url": "/v1/customers/cus_6mfMNnrzN7rayc/sources",
             "data": [
               {
-                "id": "card_16PRJWIVfRceAQlJ818vAgLX",
+                "id": "card_16Z61sIVfRceAQlJcvHsZBSh",
                 "object": "card",
                 "last4": "4242",
                 "brand": "Visa",
                 "funding": "credit",
                 "exp_month": 7,
-                "exp_year": 2015,
+                "exp_year": 2019,
                 "fingerprint": "pg1CYhCS9T2GnyZJ",
                 "country": "US",
                 "name": null,
@@ -139,12 +139,12 @@ http_interactions:
                 "tokenization_method": null,
                 "dynamic_last4": null,
                 "metadata": {},
-                "customer": "cus_6cgg0dmTXf59H2"
+                "customer": "cus_6mfMNnrzN7rayc"
               }
             ]
           },
-          "default_source": "card_16PRJWIVfRceAQlJ818vAgLX"
+          "default_source": "card_16Z61sIVfRceAQlJcvHsZBSh"
         }
     http_version: 
-  recorded_at: Fri, 17 Jul 2015 05:23:15 GMT
+  recorded_at: Wed, 12 Aug 2015 20:40:56 GMT
 recorded_with: VCR 2.9.3

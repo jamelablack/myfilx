@@ -36,6 +36,8 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '2.99'
+  gem 'elasticsearch-model'
+  gem 'elasticsearch-rails'
 
 end
 
