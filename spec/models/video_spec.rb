@@ -77,5 +77,28 @@ describe Video do
       end
 
     end
+
+    context "with title and description" do
+      it "returns an array of many videos based for title and description match" do
+        love_actually = Fabricate(:video, title: "Love Actually")
+        home_alone = Fabricate(:video, title: "Home Alone", description: "Who doesn't love Kevin and his antics")
+        refresh_index
+
+        expect(Video.search("love").records.to_a).to match_array [love_actually, home_alone]
+      end
+    end
+
+    context "multiple words must match" do
+      it "returns an array of videos when two words match title" do
+        love_actually = Fabricate(:video, title: "Love Actually")
+        home_alone = Fabricate(:video, title: "Home Alone")
+        home_alone_2 = Fabricate(:video, title: "Home Alone 2")
+        no_place_liked_home = Fabricate(:video, title: "There is no place like home")
+
+        refresh_index
+
+        expect(Video.search("home alone").records.to_a).to match_array [home_alone, home_alone_2]
+      end
+    end
   end
 end
