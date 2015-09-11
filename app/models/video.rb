@@ -23,5 +23,9 @@ class Video < ActiveRecord::Base
 
 	def rating
 		reviews.average(:rating).round(1) if reviews.average(:rating)
-	end
+  end
+
+  def as_indexed_json(options={})
+    as_json(only: [:title])
+  end
 end
