@@ -34,27 +34,6 @@ feature "User interacts with advanced search", :elasticsearch do
     expect(page).to have_no_content("Home")
   end
 
-  context "with title, description, and reviews" do
-    it "returns an empty array for no match with reviews option" do
-      home_alone = Fabricate(:video, title: "Home Alone")
-      love_actually = Fabricate(:video, title: "love Actually")
-      home_alone_review = Fabricate(:review, video: "Home Alone", body: "Such a classic")
-      refresh_index
-
-      expect(Video.search{"no match", reviews: true).records.to_a).to eq([])
-    end
-  end
-
-  it "returns an arrayof many videos with relevance title > description > review" do
-    mean_girls = Fabricate(:video, title: "Mean Girls")
-    double_trouble = Fabricate(:video, title: "Girls with be girls")
-    the_notebook = Fabricate(:video, title: "The Notebook")
-    the_notebook_review = Fabricate(:review, video: "THe Notebook", body: "Such a girls classic")
-      refresh_index
-
-      expect(Video.search("girls", reviews: true).records.to_a).to eq([mean_girls, double_trouble,the_notebook])
-  end
-
   def refresh_index
     Video.import
     Video.__elasticsearch__.refresh_index!
