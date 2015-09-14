@@ -75,7 +75,6 @@ describe Video do
 
         expect(Video.search("home").records.to_a).to match_array [home_alone, home_alone_2]
       end
-
     end
 
     context "with title and description" do
@@ -98,6 +97,27 @@ describe Video do
         refresh_index
 
         expect(Video.search("home alone").records.to_a).to match_array [home_alone, home_alone_2]
+      end
+    end
+
+    context "with title, description, and reviews" do
+      it "returns an empty array for no match with reviews option" do
+        home_alone = Fabricate(:video, title: "Home Alone")
+        love_actually = Fabricate(:video, title: "Love Actually")
+        home_alone_review = Fabricate(:review, video: home_alone, content: "Such a classic")
+        refresh_index
+
+        expect(Video.search("no match", reviews: true).records.to_a).to eq([])
+      end
+
+      it "returns an array of many videos with relevance title > description > review" do
+        mean_girls = Fabricate(:video, title: "Mean Girls")
+        double_trouble = Fabricate(:video, description: "Girls will be girls")
+        the_notebook = Fabricate(:video, title: "The Notebook")
+        the_notebook_review = Fabricate(:review, video: the_notebook, content: "Such a girls classic")
+        refresh_index
+
+        expect(Video.search("girls", reviews: true).records.to_a).to eq([mean_girls, double_trouble, the_notebook])
       end
     end
   end
