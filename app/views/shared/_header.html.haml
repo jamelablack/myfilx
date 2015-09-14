@@ -2,11 +2,13 @@
   %h1.col-md-2
     = link_to "MyFLiX", home_path
   - if current_user
-    %ul.col-md-4.clearfix
+    %ul.col-md-5.clearfix
       %li= link_to "Videos", videos_path
       %li= link_to "My Queue", my_queue_path
       %li= link_to "People", people_path
-    = form_tag search_videos_path, method: 'get', class: "col-md-5 for-search navbar-form" do
+      %li= link_to "Invite a Friend", new_invitation_path
+      %li= link_to "Advanced Search", advanced_search_videos_path
+    = form_tag search_videos_path, method: 'get', class: "col-md-4 for-search navbar-form" do
       .form-group
         %input.form-control.search-query(name="search_term" type="text" placeholder="Search for videos here")
       %button.btn.btn-default(type="submit") Search
