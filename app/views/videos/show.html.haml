@@ -21,12 +21,12 @@
             %label Rate this video
             .row
               .col-sm-3
-                = f.select :rating, options_for_video_reviews
+                = f.select :rating, options_for_video_reviews, { label: "Rate this video" }, { class: "form-control" }
           .form-group
             %label Write Review
             .row
               .col-sm-8
-                = f.text_area :content, rows: 6, class: "span6"
+                = f.text_area :content, rows: 6, class: "form-control"
         %fieldset.form-group.actions.clearfix
           %input(type="submit" value="Submit" class="btn")
           = link_to "Cancel", @video
