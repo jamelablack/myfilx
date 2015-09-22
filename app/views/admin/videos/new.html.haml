@@ -12,7 +12,7 @@
           %fieldset
             .col-md-10.col-md-offset-1
               = f.text_field :title, control_col: "col-sm-4"
-              = f.select :category_id, options_for_select(Category.all.map {|category| [category.name, category.id]})
+              = f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] })
               = f.text_area :description, rows: 6
               = f.file_field :large_cover, class: "btn-btn-file"
               = f.file_field :small_cover, class: "btn-btn-file"

@@ -1,7 +1,8 @@
 %section.advanced_search.container
-  = form_tag advanced_search_videos_path, class: "form-horizontal", method: :get do
+  .form-group
     %header
-      %h1 Advanced Search
+      %h2.results_count Advanced Search
+  = form_tag advanced_search_videos_path, class: "form-horizontal", method: :get do
     .form-group
       .col-sm-6
         = search_field_tag :query, params[:query], placeholder: "Search videos by title, description", class: "form-control"
