@@ -17,12 +17,15 @@ deployment:
       - git push git@heroku.com:aqueous-coast-5067.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app aqueous-coast-5067
       - heroku maintenance:off --app aqueous-coast-5067
-
 machine:
   ruby:
     version: 2.1.6
-  services:
-    - elasticsearch
+dependencies:
+  post:
+    - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.6.0.tar.gz
+    - tar -xvf elasticsearch-1.6.0.tar.gz
+    - elasticsearch-1.6.0/bin/elasticsearch: {background: true}
+
 deployment:
   production:
     branch: master
