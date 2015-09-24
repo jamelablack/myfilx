@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Admin Adds New Video' do
+feature 'Admin Adds New Video', vcr: true do
   scenario 'Admin successfully adds a new video' do
     admin = Fabricate(:admin)
     comedy = Fabricate(:category, name: "Comedy")

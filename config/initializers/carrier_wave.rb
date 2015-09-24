@@ -1,25 +1,15 @@
 CarrierWave.configure do |config|
-  config.storage    = :aws
-  config.aws_bucket = ENV.fetch('S3_BUCKET_NAME')
-  config.aws_acl    = 'public-read'
-
-  # Optionally define an asset host for configurations that are fronted by a
-  # content host, such as CloudFront.
-
-  # The maximum period for authenticated_urls is only 7 days.
-
-  # Set custom options such as cache control to leverage browser caching
-  config.aws_attributes = {
-    expires: 1.week.from_now.httpdate,
-    cache_control: 'max-age=604800'
+  if Rails.env.staging? || Rails.env.production?
+    config.storage = :fog
+  config.fog_provider = 'fog/aws'                        # required
+  config.fog_credentials = {
+    provider:              ENV['provider'],                        # required
+    aws_access_key_id:     ENV['aws_access_key_id'],                        # required
+    aws_secret_access_key: ENV['aws_secret_access_key'],                        # required
   }
-
-  config.aws_credentials = {
-    access_key_id:     ENV.fetch('AWS_ACCESS_KEY_ID'),
-    secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
-    region:            ENV.fetch('AWS_REGION') # Required
-  }
-
-  # Optional: Signing of download urls, e.g. for serving private
-  # content through CloudFront.
+  config.fog_directory  = 'name_of_directory'                          # required
+  else
+    config.storage = :file
+    config.enable_processing = Rails.env.development?
+  end
 end
